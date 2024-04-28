@@ -425,10 +425,11 @@
       }
       var audio_laugh = document.getElementById("audio_laugh");
       function cuoi() {
+        tayphai.style.transition = "all 1s";
         taytrai.style.transition = "all 1.2s";
         taytrai.style.height = "75px";
         taytrai.style.transform = `rotate(${quaytay360 - 120}deg)`;
-        tayphai.style.transform = `rotate(${quaytay360+5}deg)`;
+        tayphai.style.border = `2px solid rgb(160, 138, 104)`;
         mattrai.innerHTML = ">";
         matphai.innerHTML = "<";
 
@@ -437,7 +438,8 @@
           taytrai.style.transitionTimingFunction = "ease-in";
           taytrai.style.height = "115px";
           mattrai.innerHTML = "o";
-          tayphai.style.transform = `rotate(${quaytay360}deg)`;
+          tayphai.style.border = `2px solid rgb(160, 138, 103)`;
+        //   tayphai.style.transform = `rotate(${quaytay360}deg)`;
           matphai.innerHTML = "o";
           taytrai.style.transform = `rotate(${quaytay360}deg)`;
         });
