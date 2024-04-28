@@ -8,7 +8,7 @@
   <style>
     #dau {
       transition: all 1s;
-      padding: 20px;
+      padding: 10px;
       height: 50px;
       width: 50px;
       border: 2px solid rgb(160, 138, 103);
@@ -23,7 +23,7 @@
       width: 100%;
     }
     #than {
-      padding: 40px;
+      padding: 28px;
       height: 90px;
       width: 85px;
       margin: 0 5px;
@@ -42,12 +42,12 @@
       max-width: 100%;
     }
     #taytrai {
-      padding: 0 10px;
+      padding: 0 5px;
       /* animation: taytraichay 1s infinite; */
       transition: all 1s;
       transform-origin: top right;
       width: 18px;
-      height: 135px;
+      height: 115px;
       background-color: rgb(235, 206, 168);
       border-radius: 20px 5px 10px 10px;
       display: flex;
@@ -60,9 +60,7 @@
       font-size: 30px;
     }
     #tayphai {
-      padding: 0 10px;
-      /* animation: tayphaichay 1s infinite; */
-      /* z-index: -10; */
+      padding: 0 5px;
       transition: all 1s;
       /* font-weight:bolder; */
       display: flex;
@@ -73,7 +71,7 @@
       border: 2px solid;
       transform-origin: top left;
       width: 18px;
-      height: 135px;
+      height: 115px;
       background-color: rgb(235, 206, 168);
       border-radius: 5px 20px 10px 10px;
       max-width: 100%;
@@ -84,10 +82,10 @@
       justify-content: center;
       max-width: 100%;
       width: 200px;
-      gap: 30px;
+      gap: 28px;
     }
     #chantrai {
-      padding: 20px;
+      padding: 10px;
       border: 2px solid;
       /* box-shadow: -10px 0px 0px rgb(86, 0, 0); */
       transform-origin: top;
@@ -100,7 +98,7 @@
       border-bottom: 15px solid rgb(5, 79, 251);
     }
     #chanphai {
-      padding: 20px;
+      padding: 10px;
       border: 2px solid;
       /* box-shadow: -10px 0 0px rgb(86, 0, 0); */
       z-index: -3;
@@ -117,7 +115,7 @@
       width: 300px;
       margin: auto;
       transition: all 0.3s;
-      margin-top: 90px;
+      margin-top: 40%;
       position: relative;
       text-align: center;
       z-index: -199;
@@ -126,12 +124,16 @@
     #dat {
       margin: auto;
       /* width: 100; */
-      height: 90px;
+      height: 100px;
       margin-top: 5px;
       /* background-color: rgb(18, 177, 201); */
       border-radius: 15px 15px 0 0;
-      background: linear-gradient(rgb(0, 255, 0), rgb(88, 72, 51),rgb(88, 72, 51),rgb(88, 72, 51));
-
+      background: linear-gradient(
+        rgb(0, 255, 0),
+        rgb(88, 72, 51),
+        rgb(88, 72, 51),
+        rgb(88, 72, 51)
+      );
     }
     #audio_laugh,
     #audio_jump,
@@ -208,79 +210,163 @@
     body {
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
-      /* background: linear-gradient(blue, red, red); */
-      background: linear-gradient(
-          rgb(255, 247, 136),
+      /* background: linear-gradient(
           rgb(145, 218, 255),
+          rgb(255, 247, 136),
           rgb(255, 171, 249)
         )
-        no-repeat;
-      height: 100vh;
+        no-repeat; */
+      /* height: 100vh; */
+      background-color: rgb(166, 225, 255);
     }
     button {
       width: 50px;
       height: 50px;
-      border: 2px solid white;
-      box-shadow: 0 0 5px black;
+      border: none;
+      /* box-shadow: 0 0 5px rgb(140, 140, 51); */
       border-radius: 50%;
-      font-weight: bold;
+      /* font-weight: bold; */
       transition: all 0.5s;
-      background-color: rgba(32, 255, 192, 0);
-      /* background: linear-gradient(to bottom right, rgb(24, 178, 255), rgb(193, 35, 255)); */
+      background-color: rgb(0, 176, 18);
+      box-shadow: -3px 3px rgb(0, 91, 2);
+      font-size: 12px;
+      color: white;
     }
     button:focus {
       border-radius: 8px;
-      border: 4px solid rgb(255, 161, 38);
-      box-shadow: 0 0 10px rgb(253, 218, 20);
-      transform: translateY(-10px);
     }
     #btn {
+      position: absolute;
       display: flex;
       justify-content: center;
       gap: 15px;
       flex-wrap: wrap;
+      top: 65px;
+      flex-direction: column;
+    }
+    button:disabled {
+      background-color: rgb(158, 158, 158);
+      box-shadow: -3px 3px black;
+    }
+    #sun {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgb(255, 225, 0);
+      background-color: orange;
+      top: 10px;
+      right: 10px;
+    }
+    #may1 {
+      animation: maybay 10s infinite alternate;
+      width: 100px;
+      height: 50px;
+      border-radius: 30px;
+      background-color: aliceblue;
+      left: 20%;
+      top: 50px;
+      position: absolute;
+    }
+    #may2 {
+      animation: maybay 10s infinite alternate;
+      width: 100px;
+      height: 50px;
+      border-radius: 30px;
+      background-color: aliceblue;
+      left: 50%;
+      top: 60px;
+      position: absolute;
+    }
+    @keyframes maybay {
+        0%{
+            transform: translateX(0px);
+        }
+        50%{
+            transform: translateX(40px);
+        }
+        100%{
+            transform: translateX(-40px);
+        }
+    }
+    @media only screen and (min-width: 600px) {
+      #btn {
+        position: absolute;
+        position: absolute;
+        gap: 35px;
+        flex-wrap: wrap;
+        left: 30%;
+        right: 30%;
+        top: 90%;
+        flex-direction: row;
+        margin: auto;
+      }
+      #lam {
+        margin-top: 5%;
+      }
+      #may1 {
+        width: 140px;
+        height: 90px;
+        border-radius: 70px;
+        background-color: aliceblue;
+        left: 20%;
+        top: 50px;
+        position: absolute;
+        z-index: -1000;
+      }
+      #may2 {
+        z-index: -1000;
+        width: 140px;
+        height: 90px;
+        border-radius: 70px;
+        background-color: aliceblue;
+        left: 60%;
+        top: 60px;
+        position: absolute;
+      }
     }
   </style>
   <body>
-    <div class="al">
-        <div id="lam">
-          <div id="cuoi"></div>
-          <div id="dau">
-            <!-- <img src="suonhethong/public/image/cs (2).jpg" alt=""> -->
-          </div>
-          <div id="giua">
-            <div id="taytrai">o</div>
-            <div id="than"></div>
-            <div id="tayphai">o</div>
-          </div>
-          <div id="chan">
-            <div id="chantrai">==</div>
-    
-            <div id="chanphai">==</div>
-          </div>
-          <marquee id="way"><div id="vachkeduong">a</div></marquee>
+    <div id="may1"></div>
+    <div id="may2"></div>
+    <div id="sun"></div>
+    <div class="all">
+      <div id="lam">
+        <div id="cuoi"></div>
+        <div id="dau">
+          <!-- <img src="suonhethong/public/image/cs (2).jpg" alt=""> -->
         </div>
-        <div id="dat"></div>
-        <br />
-        <br />
-        <br />
-        <div id="btn">
-          <button id="giotaybtn" onclick="giotay()">Tay</button>
-          <button id="nhaybtn" onclick="nhay()">Nhảy</button>
-          <button id="cuoibtn" onclick="cuoi()">Cười</button>
-          <button id="chaybtn" onclick="chay()">Chạy</button>
-          <button id="dungchaybtn" onclick="dungchay()">Dừng chạy</button>
-          <button id="reloadbtn" onclick="reload()">FULL</button>
+        <div id="giua">
+          <div id="taytrai">o</div>
+          <div id="than"></div>
+          <div id="tayphai">o</div>
         </div>
-        <audio id="audio_laugh" controls>
-          <source src="audio/mixkit-cartoon-giggle-743.wav" />
-        </audio>
-        <audio id="audio_jump" controls>
-          <source src="audio/audi-jump.wav" />
-        </audio>
-        <audio id="audio_run" controls>
-          <source src="audio/audio-run.mp3" />
-        </audio>
+        <div id="chan">
+          <div id="chantrai">==</div>
+
+          <div id="chanphai">==</div>
+        </div>
+        <marquee id="way"><div id="vachkeduong">a</div></marquee>
+      </div>
+      <div id="dat"></div>
+      <br />
+      <div id="btn">
+        <button id="giotaybtn" onclick="giotay()">Tay</button>
+        <button id="nhaybtn" onclick="nhay()">Nhảy</button>
+        <button id="cuoibtn" onclick="cuoi()">Cười</button>
+        <button id="chaybtn" onclick="chay()">Chạy</button>
+        <button id="dungchaybtn" onclick="dungchay()">Dừng chạy</button>
+        <button id="reloadbtn" onclick="reload()">FULL</button>
+      </div>
+      <audio id="audio_laugh" controls>
+        <source src="audio/mixkit-cartoon-giggle-743.wav" />
+      </audio>
+      <audio id="audio_jump" controls>
+        <source src="audio/audi-jump.wav" />
+      </audio>
+      <audio id="audio_run" controls>
+        <source src="audio/audio-run.mp3" />
+      </audio>
     </div>
     <script>
       var quaytay360 = 0;
@@ -311,12 +397,12 @@
       var audio_laugh = document.getElementById("audio_laugh");
       function cuoi() {
         taytrai.style.transition = "all 1.2s";
-        taytrai.style.height = "95px";
+        taytrai.style.height = "75px";
         taytrai.style.transform = `rotate(${quaytay360 - 120}deg)`;
         audio_laugh.play();
         taytrai.addEventListener("transitionend", function () {
           taytrai.style.transitionTimingFunction = "ease-in";
-          taytrai.style.height = "135px";
+          taytrai.style.height = "115px";
           taytrai.style.transform = `rotate(${quaytay360}deg)`;
         });
       }
@@ -347,11 +433,6 @@
         chanphai.style.animation = "chanphaichay 0.7s infinite";
         way.style.display = "flex";
         audio();
-
-        //  }
-        // taytrai.style.transform = `rotateY(40deg) rotateX(35deg) `;
-        // tayphai.style.transform = `rotateY(-40deg) rotateX(35deg) `;
-        // chantrai.style.transform = `rotateY(-40deg) rotateX(35deg) translateX(-20px)`;
         // chanphai.style.transform = `rotateY(40deg) rotateX(35deg) translateX(20px)`;
       }
       function dungchay() {
