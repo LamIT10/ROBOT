@@ -403,6 +403,7 @@
       var chaybtn = document.getElementById("chaybtn");
 
       function giotay() {
+        hatbtn.disabled=true;
         taytrai.style.transition = "all 1s";
         tayphai.style.transition = "all 1s";
         quaytay360 += 360;
@@ -411,6 +412,7 @@
         chaybtn.disabled = true;
       }
       function nhay() {
+        hatbtn.disabled=true;
         audio_jump.play();
         taytrai.style.transition = "all 0.3s";
         tayphai.style.transition = "all 0.3s";
@@ -425,6 +427,7 @@
       }
       var audio_laugh = document.getElementById("audio_laugh");
       function cuoi() {
+        hatbtn.disabled=true;
         tayphai.style.transition = "all 1s";
         taytrai.style.transition = "all 1.2s";
         taytrai.style.height = "75px";
@@ -444,8 +447,7 @@
           taytrai.style.transform = `rotate(${quaytay360}deg)`;
         });
         taytrai.removeEventListener("transitionend", cuoisau);
-      }
-      function audio() {
+      }      function audio() {
         audio_run.play();
         t = setTimeout(audio, 0);
       }
