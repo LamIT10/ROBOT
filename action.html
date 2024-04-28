@@ -18,6 +18,7 @@
       margin: 0 auto;
       border-radius: 5px 5px 15px 15px;
       max-width: 100%;
+      text-align: center;
     }
     #dau img {
       width: 100%;
@@ -137,7 +138,8 @@
     }
     #audio_laugh,
     #audio_jump,
-    #audio_run {
+    #audio_run,
+    #audio_moho {
       display: none;
     }
     #way {
@@ -241,7 +243,7 @@
       justify-content: center;
       gap: 15px;
       flex-wrap: wrap;
-      top: 65px;
+      top: 30px;
       flex-direction: column;
     }
     button:disabled {
@@ -279,15 +281,15 @@
       position: absolute;
     }
     @keyframes maybay {
-        0%{
-            transform: translateX(0px);
-        }
-        50%{
-            transform: translateX(40px);
-        }
-        100%{
-            transform: translateX(-40px);
-        }
+      0% {
+        transform: translateX(0px);
+      }
+      50% {
+        transform: translateX(40px);
+      }
+      100% {
+        transform: translateX(-40px);
+      }
     }
     @media only screen and (min-width: 600px) {
       #btn {
@@ -295,8 +297,8 @@
         position: absolute;
         gap: 35px;
         flex-wrap: wrap;
-        left: 30%;
-        right: 30%;
+        left: 10%;
+        right: 10%;
         top: 90%;
         flex-direction: row;
         margin: auto;
@@ -325,6 +327,22 @@
         position: absolute;
       }
     }
+    #mat {
+      display: flex;
+      justify-content: space-around;
+      font-weight: bold;
+      font-size: 22px;
+      transition: all 1s;
+    }
+    #mieng {
+      transition: all 1s;
+      background-color: brown;
+      width: 30px;
+      height: 12px;
+      margin: 7px auto;
+      border: 1px solid black;
+      border-radius: 5px 5px 50% 50%;
+    }
   </style>
   <body>
     <div id="may1"></div>
@@ -334,7 +352,11 @@
       <div id="lam">
         <div id="cuoi"></div>
         <div id="dau">
-          <!-- <img src="suonhethong/public/image/cs (2).jpg" alt=""> -->
+          <div id="mat">
+            <div id="mattrai">o</div>
+            <div id="matphai">o</div>
+          </div>
+          <div id="mieng"></div>
         </div>
         <div id="giua">
           <div id="taytrai">o</div>
@@ -356,6 +378,7 @@
         <button id="cuoibtn" onclick="cuoi()">Cười</button>
         <button id="chaybtn" onclick="chay()">Chạy</button>
         <button id="dungchaybtn" onclick="dungchay()">Dừng chạy</button>
+        <button id="hatbtn" onclick="hat()">Hát / Dừng</button>
         <button id="reloadbtn" onclick="reload()">FULL</button>
       </div>
       <audio id="audio_laugh" controls>
@@ -366,6 +389,9 @@
       </audio>
       <audio id="audio_run" controls>
         <source src="audio/audio-run.mp3" />
+      </audio>
+      <audio id="audio_moho" controls>
+        <source src="audio/audi-moho.m4a" />
       </audio>
     </div>
     <script>
@@ -399,10 +425,15 @@
         taytrai.style.transition = "all 1.2s";
         taytrai.style.height = "75px";
         taytrai.style.transform = `rotate(${quaytay360 - 120}deg)`;
+        mattrai.innerHTML = ">";
+        matphai.innerHTML = "<";
+
         audio_laugh.play();
         taytrai.addEventListener("transitionend", function () {
           taytrai.style.transitionTimingFunction = "ease-in";
           taytrai.style.height = "115px";
+          mattrai.innerHTML = "o";
+          matphai.innerHTML = "o";
           taytrai.style.transform = `rotate(${quaytay360}deg)`;
         });
       }
@@ -455,6 +486,26 @@
         cuoibtn.disabled = !cuoibtn.disabled;
         // reloadbtn.disabled = !reloadbtn.disabled;
         clearTimeout(t);
+      }
+      var checkhat = 0;
+      function hat() {
+        if (checkhat % 2 == 0) {
+          audio_moho.play();
+          taytrai.style.height = "55px";
+          taytrai.style.borderBottom = "19px solid black";
+          mieng.style.borderRadius = "50%";
+          mieng.style.height = "20px";
+          taytrai.style.transform = `rotate(${quaytay360 - 120}deg)`;
+          checkhat++;
+        } else {
+          audio_moho.pause();
+          checkhat++;
+          taytrai.style.height = "115px";
+          taytrai.style.borderBottom = "";
+          mieng.style.borderRadius = "5px 5px 50% 50%";
+          mieng.style.height = "12px";
+          taytrai.style.transform = `rotate(${quaytay360}deg)`;
+        }
       }
     </script>
   </body>
