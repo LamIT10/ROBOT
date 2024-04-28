@@ -377,7 +377,9 @@
         <button id="nhaybtn" onclick="nhay()">Nhảy</button>
         <button id="cuoibtn" onclick="cuoi()">Cười</button>
         <button id="chaybtn" onclick="chay()">Chạy</button>
-        <button id="dungchaybtn" onclick="dungchay()">Dừng chạy</button>
+        <button id="dungchaybtn" disabled onclick="dungchay()">
+          Dừng chạy
+        </button>
         <button id="hatbtn" onclick="hat()">Hát / Dừng</button>
         <button id="reloadbtn" onclick="reload()">FULL</button>
       </div>
@@ -398,6 +400,7 @@
       var quaytay360 = 0;
       var taytrai = document.getElementById("taytrai");
       var tayphai = document.getElementById("tayphai");
+      var chaybtn = document.getElementById("chaybtn");
 
       function giotay() {
         taytrai.style.transition = "all 1s";
@@ -405,7 +408,7 @@
         quaytay360 += 360;
         taytrai.style.transform = `rotate(${quaytay360}deg)`;
         tayphai.style.transform = `rotate(-${quaytay360}deg)`;
-        chaybtn.disabled = "none";
+        chaybtn.disabled = true;
       }
       function nhay() {
         audio_jump.play();
@@ -425,17 +428,20 @@
         taytrai.style.transition = "all 1.2s";
         taytrai.style.height = "75px";
         taytrai.style.transform = `rotate(${quaytay360 - 120}deg)`;
+        tayphai.style.transform = `rotate(${quaytay360+5}deg)`;
         mattrai.innerHTML = ">";
         matphai.innerHTML = "<";
 
         audio_laugh.play();
-        taytrai.addEventListener("transitionend", function () {
+        tayphai.addEventListener("transitionend", function cuoisau() {
           taytrai.style.transitionTimingFunction = "ease-in";
           taytrai.style.height = "115px";
           mattrai.innerHTML = "o";
+          tayphai.style.transform = `rotate(${quaytay360}deg)`;
           matphai.innerHTML = "o";
           taytrai.style.transform = `rotate(${quaytay360}deg)`;
         });
+        taytrai.removeEventListener("transitionend", cuoisau);
       }
       function audio() {
         audio_run.play();
@@ -446,12 +452,14 @@
       }
       function chay() {
         //  if(chuanbi==0){
+        dungchaybtn.disabled = false;
         dat.style.display = "none";
         giotaybtn.disabled = "true";
         nhaybtn.disabled = "true";
         cuoibtn.disabled = "true";
         lam.style.transform = " rotateY(-25deg)";
         tayphai.style.zIndex = "-10";
+        hatbtn.disabled = true;
         taytrai.style.animation = "taytraichay 0.7s infinite";
         chantrai.style.boxShadow = "-10px 0px 0px rgb(86, 0, 0)";
         dau.style.boxShadow = "-10px 0px 0px rgb(86, 0, 0)";
@@ -476,35 +484,44 @@
         than.style.boxShadow = "inset 0 0 10px black";
         tayphai.style.animation = "none";
         dau.style.boxShadow = "none";
+        hatbtn.disabled = false;
         taytrai.style.boxShadow = "none";
         tayphai.style.boxShadow = "none";
         chantrai.style.animation = "none";
         chanphai.style.animation = "none";
         way.style.display = "none";
-        giotaybtn.disabled = !giotaybtn.disabled;
-        nhaybtn.disabled = !nhaybtn.disabled;
-        cuoibtn.disabled = !cuoibtn.disabled;
+        giotaybtn.disabled = false;
+        nhaybtn.disabled = false;
+        cuoibtn.disabled = false;
         // reloadbtn.disabled = !reloadbtn.disabled;
         clearTimeout(t);
       }
-      var checkhat = 0;
+
       function hat() {
-        if (checkhat % 2 == 0) {
+        if (nhaybtn.disabled == false) {
           audio_moho.play();
           taytrai.style.height = "55px";
           taytrai.style.borderBottom = "19px solid black";
           mieng.style.borderRadius = "50%";
           mieng.style.height = "20px";
           taytrai.style.transform = `rotate(${quaytay360 - 120}deg)`;
-          checkhat++;
+          giotaybtn.disabled = "true";
+          nhaybtn.disabled = "true";
+          cuoibtn.disabled = "true";
+          chaybtn.disabled = true;
+       
         } else {
+          giotaybtn.disabled = false;
+          nhaybtn.disabled = !nhaybtn.disabled;
+          cuoibtn.disabled = !cuoibtn.disabled;
+          //   chaybtn.disabled = !chaybtn.disabled;
           audio_moho.pause();
-          checkhat++;
           taytrai.style.height = "115px";
           taytrai.style.borderBottom = "";
           mieng.style.borderRadius = "5px 5px 50% 50%";
           mieng.style.height = "12px";
           taytrai.style.transform = `rotate(${quaytay360}deg)`;
+        
         }
       }
     </script>
