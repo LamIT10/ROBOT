@@ -4,6 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Robot Project</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <style>
     #dau {
@@ -99,6 +106,7 @@
       border-bottom: 15px solid rgb(5, 79, 251);
     }
     #chanphai {
+      /* animation: rotate30 0.5s forwards; */
       padding: 10px;
       border: 2px solid;
       /* box-shadow: -10px 0 0px rgb(86, 0, 0); */
@@ -112,6 +120,14 @@
       border-radius: 10px 10px 0 0;
       border-bottom: 15px solid rgb(5, 79, 251);
     }
+    @keyframes rotate30 {
+      0% {
+        transform: rotateX(0deg);
+      }
+      50% {
+        transform: rotateX(50deg) rotateZ(-20deg);
+      }
+    }
     #lam {
       width: 300px;
       margin: auto;
@@ -121,8 +137,10 @@
       text-align: center;
       z-index: -199;
       max-width: 100%;
+      border: 2px solid;
     }
     #dat {
+      position: relative;
       margin: auto;
       /* width: 100; */
       height: 100px;
@@ -225,9 +243,7 @@
       width: 50px;
       height: 50px;
       border: none;
-      /* box-shadow: 0 0 5px rgb(140, 140, 51); */
       border-radius: 50%;
-      /* font-weight: bold; */
       transition: all 0.5s;
       background-color: rgb(0, 176, 18);
       box-shadow: -3px 3px rgb(0, 91, 2);
@@ -245,10 +261,6 @@
       flex-wrap: wrap;
       top: 30px;
       flex-direction: column;
-    }
-    button:disabled {
-      background-color: rgb(158, 158, 158);
-      box-shadow: -3px 3px black;
     }
     #sun {
       position: absolute;
@@ -343,6 +355,50 @@
       border: 1px solid black;
       border-radius: 5px 5px 50% 50%;
     }
+    #habtn {
+      display: none;
+      background-color: rgb(255, 0, 0);
+      font-weight: bolder;
+      font-size: 21px;
+    }
+    #ball {
+      transition: all 3s;
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(black, white, black, white, black);
+      border: 3px solid white;
+      border-radius: 20px;
+      bottom: 200%;
+      right: 30px;
+      display: block;
+      z-index: 100;
+      /* opacity: 0%; */
+    }
+    #rehandbtn {
+      font-size: 25px;
+      background-color: rgb(0, 136, 255);
+    }
+
+    button:disabled {
+      background-color: rgb(158, 158, 158);
+      box-shadow: -3px 3px black;
+    }
+    #rehandbtn:disabled {
+      background-color: rgb(158, 158, 158);
+      box-shadow: -3px 3px black;
+    }
+    #baocol {
+      width: 120px;
+      /* height: 100px; */
+      background-color: aliceblue;
+      justify-content: space-between;
+      padding: 10px;
+      align-items: center;
+      display: flex;
+      border-radius: 10px;
+      border: 2px dotted ;
+    }
   </style>
   <body>
     <div id="may1"></div>
@@ -350,6 +406,7 @@
     <div id="sun"></div>
     <div class="all">
       <div id="lam">
+        <div id="ball"></div>
         <div id="cuoi"></div>
         <div id="dau">
           <div id="mat">
@@ -374,14 +431,21 @@
       <br />
       <div id="btn">
         <button id="giotaybtn" onclick="giotay()">Tay</button>
+        <button id="habtn" onclick="ha()">Hạ</button>
         <button id="nhaybtn" onclick="nhay()">Nhảy</button>
+        <button id="btnda" onclick="da()">Đá bóng</button>
         <button id="cuoibtn" onclick="cuoi()">Cười</button>
         <button id="chaybtn" onclick="chay()">Chạy</button>
         <button id="dungchaybtn" disabled onclick="dungchay()">
           Dừng chạy
         </button>
         <button id="hatbtn" onclick="hat()">Hát / Dừng</button>
-        <button id="reloadbtn" onclick="reload()">FULL</button>
+        <button disabled id="rehandbtn" onclick="rehand()">
+          <i class="fa-solid fa-unlock-keyhole"></i>
+        </button>
+        <div id="baocol">
+          <b>Màu áo: </b><input type="color" name="col" id="col" />
+        </div>
       </div>
       <audio id="audio_laugh" controls>
         <source src="audio/mixkit-cartoon-giggle-743.wav" />
@@ -396,74 +460,155 @@
         <source src="audio/audi-moho.m4a" />
       </audio>
     </div>
+
     <script>
       var quaytay360 = 0;
+      var b = 0;
+      var haa = 0;
       var taytrai = document.getElementById("taytrai");
       var tayphai = document.getElementById("tayphai");
       var chaybtn = document.getElementById("chaybtn");
+      var allbtn = document.getElementsByTagName("button");
+      col.addEventListener("change", function () {
+        than.style.backgroundColor = col.value;
+      });
+
+      //   alert(allbtn[9].innerHTML);
+      function lockfull(x) {
+        for (var i = 0; i < allbtn.length; i++) {
+          if (i == x || i == allbtn.length - 1 || (i == 1 && x != 5)) {
+            allbtn[i].disabled = false;
+            continue;
+          }
+
+          allbtn[i].disabled = true;
+        }
+      }
+      function rehand() {
+        // riêng ball
+        ball.style.transform = "translateX(0) rotateZ(0)";
+        ball.style.transition = "none";
+        ball.style.opacity = "0%";
+        ball.style.bottom = "200%";
+        // riêng ball
+
+        quaytay360 = 0;
+        taytrai.style.transition = "none";
+        tayphai.style.transition = "none";
+        taytrai.style.transform = `none`;
+        tayphai.style.transform = `none`;
+        for (var i = 0; i < allbtn.length; i++) {
+          if (i == 6) {
+            allbtn[i].disabled = true;
+            continue;
+          }
+          allbtn[i].disabled = false;
+        }
+      }
+      function da() {
+        let checkda = true;
+        lockfull(3);
+        ball.style.bottom = "0%";
+        ball.style.transition = "all 0.7s";
+        ball.style.opacity = "100%";
+        chanphai.style.transition = "all 0.4s";
+        chanphai.style.transform = "rotate(-20deg)";
+
+        chanphai.addEventListener("transitionend", function () {
+          if (checkda == true) {
+            ball.style.transitionDelay = "0.21s";
+            ball.style.transform = "translateX(50vw) rotateZ(720deg) ";
+            chanphai.style.transform = "rotate(0deg)";
+            checkda = false;
+            btnda.disabled = true;
+          }
+        });
+      }
 
       function giotay() {
-        hatbtn.disabled=true;
+        lockfull(0);
+        b += 360;
+        quaytay360 += 360;
         taytrai.style.transition = "all 1s";
         tayphai.style.transition = "all 1s";
-        quaytay360 += 360;
         taytrai.style.transform = `rotate(${quaytay360}deg)`;
         tayphai.style.transform = `rotate(-${quaytay360}deg)`;
-        chaybtn.disabled = true;
+
+        if (quaytay360 > 7200 && b > 7200) {
+          allbtn[1].disabled = false;
+          lam.style.transition = "all 5s";
+          lam.style.transform = "translateY(-200%)";
+          habtn.style.display = "block";
+          mieng.style.borderRadius = "5px";
+          mieng.style.height = "30px";
+          haa++;
+        }
+      }
+
+      function ha() {
+        b = 0;
+        lam.style.transition = "all 0.3s";
+        lam.style.transform = "translateY(0px)";
+        habtn.style.display = "none";
+        mieng.style.borderRadius = " 5px 5px 50% 50%";
+        mieng.style.height = "12px";
       }
       function nhay() {
-        hatbtn.disabled=true;
+        let checknhay = true;
+        lockfull(2);
         audio_jump.play();
+        lam.style.transition = "all 0.3s";
         taytrai.style.transition = "all 0.3s";
         tayphai.style.transition = "all 0.3s";
         lam.style.transform = "translateY(-30px)";
-        taytrai.style.transform = `rotate(${quaytay360 + 30}deg)`;
-        tayphai.style.transform = `rotate(${-quaytay360 - 30}deg)`;
+        taytrai.style.transform = `rotate(30deg)`;
+        tayphai.style.transform = `rotate(-30deg)`;
         lam.addEventListener("transitionend", function () {
-          lam.style.transform = "translateY(0)";
-          taytrai.style.transform = `rotate(${quaytay360}deg)`;
-          tayphai.style.transform = `rotate(${-quaytay360}deg)`;
+          if (checknhay == true) {
+            lam.style.transform = "translateY(0)";
+            taytrai.style.transform = `rotate(0deg)`;
+            tayphai.style.transform = `rotate(0deg)`;
+            checknhay = false;
+          }
         });
       }
       var audio_laugh = document.getElementById("audio_laugh");
+      //   rehandbtn.addEventListener("click", rehand);
       function cuoi() {
-        hatbtn.disabled=true;
+        let checkcuoi = true;
+        lockfull(4);
+        hatbtn.disabled = true;
         tayphai.style.transition = "all 1s";
-        taytrai.style.transition = "all 1.2s";
+        taytrai.style.transition = "all 0.6s";
         taytrai.style.height = "75px";
-        taytrai.style.transform = `rotate(${quaytay360 - 120}deg)`;
+        taytrai.style.transform = `rotate(-120deg)`;
         tayphai.style.border = `2px solid rgb(160, 138, 104)`;
         mattrai.innerHTML = ">";
         matphai.innerHTML = "<";
-
         audio_laugh.play();
         tayphai.addEventListener("transitionend", function cuoisau() {
-          taytrai.style.transitionTimingFunction = "ease-in";
-          taytrai.style.height = "115px";
-          mattrai.innerHTML = "o";
-          tayphai.style.border = `2px solid rgb(160, 138, 103)`;
-        //   tayphai.style.transform = `rotate(${quaytay360}deg)`;
-          matphai.innerHTML = "o";
-          taytrai.style.transform = `rotate(${quaytay360}deg)`;
+          if (checkcuoi == true) {
+            taytrai.style.transitionDelay = "1s";
+            taytrai.style.transitionTimingFunction = "ease-in";
+            taytrai.style.height = "115px";
+            mattrai.innerHTML = "o";
+            tayphai.style.border = `2px solid rgb(160, 138, 103)`;
+            matphai.innerHTML = "o";
+            taytrai.style.transform = `rotate(0deg)`;
+            checkcuoi = false;
+          }
         });
-        taytrai.removeEventListener("transitionend", cuoisau);
-      }      function audio() {
+      }
+      function audio() {
         audio_run.play();
         t = setTimeout(audio, 0);
       }
-      function reload() {
-        location.reload();
-      }
       function chay() {
-        //  if(chuanbi==0){
+        lockfull(5);
         dungchaybtn.disabled = false;
         dat.style.display = "none";
-        giotaybtn.disabled = "true";
-        nhaybtn.disabled = "true";
-        cuoibtn.disabled = "true";
         lam.style.transform = " rotateY(-25deg)";
         tayphai.style.zIndex = "-10";
-        hatbtn.disabled = true;
         taytrai.style.animation = "taytraichay 0.7s infinite";
         chantrai.style.boxShadow = "-10px 0px 0px rgb(86, 0, 0)";
         dau.style.boxShadow = "-10px 0px 0px rgb(86, 0, 0)";
@@ -476,7 +621,6 @@
         chanphai.style.animation = "chanphaichay 0.7s infinite";
         way.style.display = "flex";
         audio();
-        // chanphai.style.transform = `rotateY(40deg) rotateX(35deg) translateX(20px)`;
       }
       function dungchay() {
         dat.style.display = "block";
@@ -488,44 +632,35 @@
         than.style.boxShadow = "inset 0 0 10px black";
         tayphai.style.animation = "none";
         dau.style.boxShadow = "none";
-        hatbtn.disabled = false;
         taytrai.style.boxShadow = "none";
         tayphai.style.boxShadow = "none";
         chantrai.style.animation = "none";
         chanphai.style.animation = "none";
         way.style.display = "none";
-        giotaybtn.disabled = false;
-        nhaybtn.disabled = false;
-        cuoibtn.disabled = false;
-        // reloadbtn.disabled = !reloadbtn.disabled;
+        rehand();
         clearTimeout(t);
       }
 
       function hat() {
         if (nhaybtn.disabled == false) {
+          lockfull(7);
+          rehandbtn.disabled = true;
           audio_moho.play();
           taytrai.style.height = "55px";
           taytrai.style.borderBottom = "19px solid black";
           mieng.style.borderRadius = "50%";
           mieng.style.height = "20px";
+          taytrai.style.transition = "all 1s";
           taytrai.style.transform = `rotate(${quaytay360 - 120}deg)`;
-          giotaybtn.disabled = "true";
-          nhaybtn.disabled = "true";
-          cuoibtn.disabled = "true";
-          chaybtn.disabled = true;
-       
         } else {
-          giotaybtn.disabled = false;
-          nhaybtn.disabled = !nhaybtn.disabled;
-          cuoibtn.disabled = !cuoibtn.disabled;
-          //   chaybtn.disabled = !chaybtn.disabled;
+          rehand();
           audio_moho.pause();
+          taytrai.style.transition = "all 1s";
           taytrai.style.height = "115px";
           taytrai.style.borderBottom = "";
           mieng.style.borderRadius = "5px 5px 50% 50%";
           mieng.style.height = "12px";
           taytrai.style.transform = `rotate(${quaytay360}deg)`;
-        
         }
       }
     </script>
