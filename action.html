@@ -137,7 +137,7 @@
       text-align: center;
       z-index: -199;
       max-width: 100%;
-      border: 2px solid;
+      /* border: 2px solid; */
     }
     #dat {
       position: relative;
@@ -271,6 +271,18 @@
       background-color: orange;
       top: 10px;
       right: 10px;
+      animation: 3s color-change infinite alternate;
+    }
+    @keyframes color-change {
+      0% {
+        background-color: rgb(255, 200, 0);
+      }
+      50% {
+        background-color: rgb(255, 123, 0);
+      }
+      100% {
+        background-color: rgb(255, 89, 0);
+      }
     }
     #may1 {
       animation: maybay 10s infinite alternate;
@@ -397,7 +409,18 @@
       align-items: center;
       display: flex;
       border-radius: 10px;
-      border: 2px dotted ;
+      border: 2px dotted;
+    }
+    a{
+        display: block;
+        text-decoration: none;
+        border: 2px solid;
+        width: 100px;
+        padding: 10px;
+        border-radius: 10px;
+        /* background-color: rgb(140, 0, 255); */
+        background: linear-gradient(to bottom , rgb(0, 17, 255), rgb(0, 195, 255));
+        color: white;
     }
   </style>
   <body>
@@ -443,9 +466,6 @@
         <button disabled id="rehandbtn" onclick="rehand()">
           <i class="fa-solid fa-unlock-keyhole"></i>
         </button>
-        <div id="baocol">
-          <b>Màu áo: </b><input type="color" name="col" id="col" />
-        </div>
       </div>
       <audio id="audio_laugh" controls>
         <source src="audio/mixkit-cartoon-giggle-743.wav" />
@@ -460,7 +480,7 @@
         <source src="audio/audi-moho.m4a" />
       </audio>
     </div>
-
+<a href="bedroom.html">Phòng ngủ</a>
     <script>
       var quaytay360 = 0;
       var b = 0;
@@ -469,9 +489,7 @@
       var tayphai = document.getElementById("tayphai");
       var chaybtn = document.getElementById("chaybtn");
       var allbtn = document.getElementsByTagName("button");
-      col.addEventListener("change", function () {
-        than.style.backgroundColor = col.value;
-      });
+     
 
       //   alert(allbtn[9].innerHTML);
       function lockfull(x) {
