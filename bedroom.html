@@ -129,15 +129,18 @@
       }
     }
     #lam {
-      width: 300px;
+      /* transform: rotate(90deg) translateY(100%) rotateY(60deg); */
+      transform-origin: bottom right;
+      width: 215px;
       margin: auto;
-      transition: all 0.3s;
+      transition: all 1s;
       margin-top: 40%;
       position: relative;
       text-align: center;
       z-index: -199;
       max-width: 100%;
       /* border: 2px solid; */
+      height: max-content;
     }
     #dat {
       position: relative;
@@ -145,15 +148,13 @@
       height: 100px;
       margin-top: 5px;
       border-radius: 15px 15px 0 0;
-      border: 5px solid white;
+      border: 5px solid rgb(13, 11, 54);
+      border-top-color: rgb(255, 255, 255);
       background: linear-gradient(
-        rgb(255, 0, 0),
-        rgb(255, 166, 0),
-        rgb(191, 255, 0),
-        rgb(13, 255, 0),
-        rgb(0, 238, 255),
-        rgb(8, 0, 255),
-        rgb(255, 0, 255)
+        rgb(255, 255, 255),
+        rgb(42, 51, 108),
+        rgb(42, 51, 108),
+        rgb(0, 0, 0)
       );
     }
     #audio_laugh,
@@ -179,6 +180,7 @@
     }
 
     #body {
+      transition: 1s;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
       background-color: rgb(239, 163, 91);
@@ -253,7 +255,7 @@
       }
     }
     @media only screen and (min-width: 600px) {
-      #btn {
+      /* #btn {
         position: absolute;
         position: absolute;
         gap: 35px;
@@ -263,11 +265,11 @@
         top: 90%;
         flex-direction: row;
         margin: auto;
-      }
+      } */
       #lam {
         margin-top: 5%;
       }
-      #may1 {
+      /* #may1 {
         width: 140px;
         height: 90px;
         border-radius: 70px;
@@ -286,7 +288,7 @@
         left: 60%;
         top: 60px;
         position: absolute;
-      }
+      } */
     }
     #mat {
       display: flex;
@@ -424,7 +426,14 @@
         </div>
         <marquee id="way"><div id="vachkeduong">a</div></marquee>
       </div>
-      <div id="dat"></div>
+      <div id="dat">
+        <br />
+        <hr />
+        <hr />
+        <br />
+        <hr />
+        <br />
+      </div>
       <br />
       <!-- <div id="btn">
         <button id="giotaybtn" onclick="giotay()">Tay</button>
@@ -469,7 +478,44 @@
       </audio>
     </div>
     <a href="action.html">Ngoài trời</a>
+    <button id="btntrai" onclick="ngang(0)"><<</button>
+    <button id="btnphai" onclick="ngang(1)">>></button>
+    <button id="btnsleep" onclick="sleep()">Ngủ</button>
     <script>
+      var checktraiphai = 0;
+      var checkngu = 0;
+      function sleep() {
+        if (checkngu % 2 == 0) {
+          lam.style.transform = "rotate(90deg) translateY(100%) rotateY(60deg)";
+          mattrai.innerHTML = "-";
+          matphai.innerHTML = "-";
+          mieng.style.height = "5px";
+          mieng.style.borderRight = "10px solid aqua";
+          checkngu++;
+        } else {
+          lam.style.transform = "none";
+          mattrai.innerHTML = "o";
+          matphai.innerHTML = "o";
+          mieng.style.height = "12px";
+          mieng.style.borderRight = "1px solid black";
+          checkngu++;
+        }
+      }
+      function ngang(x) {
+        if (checkngu > 0) checkngu--;
+        switch (x) {
+          case 0: {
+            checktraiphai -= 15;
+            lam.style.transform = `translateX(${checktraiphai}px)`;
+            break;
+          }
+          case 1: {
+            checktraiphai += 15;
+            lam.style.transform = `translateX(${checktraiphai}px)`;
+            break;
+          }
+        }
+      }
       var checkden = 0;
 
       col.addEventListener("change", function () {
