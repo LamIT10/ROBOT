@@ -267,7 +267,7 @@
       width: 80px;
       height: 80px;
       border-radius: 50%;
-      box-shadow: 0 0 20px rgb(255, 225, 0);
+      box-shadow: 0 0 50px rgb(255, 106, 0);
       background-color: orange;
       top: 10px;
       right: 10px;
@@ -285,25 +285,41 @@
       }
     }
     #may1 {
-      animation: maybay 10s infinite alternate;
-      width: 100px;
+      /* animation: maybay1 3s infinite alternate; */
+      display: flex;
+      align-items: center;
+      width: 210px;
       height: 50px;
-      border-radius: 30px;
+      border-radius: 20px;
       background-color: aliceblue;
       left: 20%;
-      top: 50px;
+      top: 30px;
       position: absolute;
+      color: rgb(152, 142, 142);
+      font-size: 25px;
+      /* box-shadow: 0 0 100px white; */
+      background: linear-gradient(
+        to right,
+        rgb(255, 255, 255),
+        rgb(166, 225, 255),
+        rgb(166, 225, 255),
+        rgb(166, 225, 255),
+        rgb(166, 225, 255),
+        rgb(255, 255, 255)
+      );
     }
     #may2 {
+      box-shadow: 0 0 20px white;
       animation: maybay 10s infinite alternate;
       width: 100px;
       height: 50px;
       border-radius: 30px;
       background-color: aliceblue;
-      left: 50%;
+      left: 70%;
       top: 60px;
       position: absolute;
     }
+
     @keyframes maybay {
       0% {
         transform: translateX(0px);
@@ -331,14 +347,11 @@
         margin-top: 5%;
       }
       #may1 {
-        width: 140px;
-        height: 90px;
-        border-radius: 70px;
-        background-color: aliceblue;
-        left: 20%;
+        left: 0px;
         top: 50px;
         position: absolute;
         z-index: -1000;
+        width: 100vw;
       }
       #may2 {
         z-index: -1000;
@@ -411,20 +424,22 @@
       border-radius: 10px;
       border: 2px dotted;
     }
-    a{
-        display: block;
-        text-decoration: none;
-        border: 2px solid;
-        width: 100px;
-        padding: 10px;
-        border-radius: 10px;
-        /* background-color: rgb(140, 0, 255); */
-        background: linear-gradient(to bottom , rgb(0, 17, 255), rgb(0, 195, 255));
-        color: white;
+    a {
+      display: block;
+      text-decoration: none;
+      border: 2px solid;
+      width: 100px;
+      padding: 10px;
+      border-radius: 10px;
+      /* background-color: rgb(140, 0, 255); */
+      background: linear-gradient(to bottom, rgb(0, 17, 255), rgb(0, 195, 255));
+      color: white;
     }
   </style>
   <body>
-    <div id="may1"></div>
+    <marquee direction="right" id="may1"
+      ><i class="fa-solid fa-plane"></i
+    ></marquee>
     <div id="may2"></div>
     <div id="sun"></div>
     <div class="all">
@@ -480,7 +495,8 @@
         <source src="audio/audi-moho.m4a" />
       </audio>
     </div>
-<a href="bedroom.html">Phòng ngủ</a>
+    <a href="bedroom.html">Phòng ngủ</a>
+    
     <script>
       var quaytay360 = 0;
       var b = 0;
@@ -489,7 +505,6 @@
       var tayphai = document.getElementById("tayphai");
       var chaybtn = document.getElementById("chaybtn");
       var allbtn = document.getElementsByTagName("button");
-     
 
       //   alert(allbtn[9].innerHTML);
       function lockfull(x) {
